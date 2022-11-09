@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:desafio_todo/widget/item_todo.dart';
 
 class Feito extends StatelessWidget {
   const Feito({Key? key}) : super(key: key);
@@ -7,7 +8,8 @@ class Feito extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: Text('Pagina Feito'),
+        // child: Text('Pagina Feito'),
+        child: ItemToDo(),
       ),
     );
   }
