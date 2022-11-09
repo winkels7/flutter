@@ -2,6 +2,10 @@
 
 A new Flutter project.
 
+## Paleta
+
+https://coolors.co/08415c-cc2936-ebbab9-388697-b5ffe1
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
