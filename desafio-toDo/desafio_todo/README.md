@@ -6,6 +6,8 @@ A new Flutter project.
 
 https://coolors.co/08415c-cc2936-ebbab9-388697-b5ffe1
 
+2.0 -> https://coolors.co/08415c-cc2936-ffa987-388697-b5ffe1
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.

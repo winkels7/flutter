@@ -15,20 +15,22 @@ class ItemToDo extends StatelessWidget {
       ),
       tileColor: Colors.white,
       leading: Icon(
-        Icons.check_box,
-        color: Colors.cyan,
+        todo.feito ? Icons.check_box : Icons.check_box_outline_blank,
+        color: Color(0xFF388697),
       ),
-      title: Text( todo.todoText!, 
+      title: Text(
+        todo.todoText!,
         style: TextStyle(
             fontSize: 18,
             color: Colors.black,
-            decoration: TextDecoration.lineThrough),
+            decoration:
+                todo.feito ? TextDecoration.lineThrough : TextDecoration.none),
       ),
       trailing: Container(
           height: 35,
           width: 35,
           decoration: BoxDecoration(
-            color: Colors.red,
+            color: Color(0xFFFFA987),
             borderRadius: BorderRadius.circular(5),
           ),
           child: IconButton(

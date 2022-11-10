@@ -45,10 +45,10 @@ class _TabLayoutExampleState extends State<TabLayoutExample>
     _tabController.animateTo(2);
   }
 
-  static const List<Widget> _views = [
-    const Center(child: Tudo()),
-    const Center(child: Feito()),
-    const Center(child: NaoFeito()),
+  static  List<Widget> _views = [
+    Center(child: Tudo()),
+    Center(child: Feito()),
+    Center(child: NaoFeito()),
   ];
 
   @override
@@ -63,7 +63,7 @@ class _TabLayoutExampleState extends State<TabLayoutExample>
           ),
           bottomNavigationBar: Menu(),
           floatingActionButton: FloatBtn(),
-          body: const TabBarView(
+          body: TabBarView(
             children: _views,
           ),
         ),
