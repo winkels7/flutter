@@ -3,6 +3,9 @@ import 'package:desafio_todo/widget/item_todo.dart';
 
 // import 'package:desafio_todo/model/item.dart';
 
+import 'package:desafio_todo/list/todolist.dart';
+import 'package:desafio_todo/widget/dialogo.dart';
+
 class NaoFeito extends StatefulWidget {
   NaoFeito({super.key});
 
@@ -10,17 +13,41 @@ class NaoFeito extends StatefulWidget {
   State<NaoFeito> createState() => _NaoFeitoState();
 }
 
-// final listaTodo = ToDo.todoLista();
 
 class _NaoFeitoState extends State<NaoFeito> {
-  List listaTodo = [
-    ["Teste", false],
-    ["Teste 2", false]
-  ];
+  
+  final _controller = TextEditingController();
 
   void checkBoxChanged(bool? value, int index) {
     setState(() {
       listaTodo[index][1] = !listaTodo[index][1];
+    });
+  }
+
+  void saveNewTask() {
+    setState(() {
+      listaTodo.add([_controller.text, false]);
+      _controller.clear();
+    });
+    Navigator.of(context).pop();
+  }
+
+    void createNewTask() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialogo(
+          controller: _controller,
+          onSave: saveNewTask,
+          onCancel: () => Navigator.of(context).pop(),
+        );
+      },
+    );
+  }
+
+  void deletar(int index) {
+    setState(() {
+      listaTodo.removeAt(index);
     });
   }
 
@@ -36,6 +63,7 @@ class _NaoFeitoState extends State<NaoFeito> {
                   nomeTarefa: listaTodo[index][0],
                   feito: listaTodo[index][1],
                   onChanged: (value) => checkBoxChanged(value, index),
+                  deletar: (context) => deletar(index),
                 );
               }))),
     );

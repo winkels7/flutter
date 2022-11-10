@@ -1,46 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:desafio_todo/screens/feito.dart';
 
 class FloatBtn extends StatelessWidget {
-  VoidCallback onEnviar;
+  VoidCallback createNewTask;
 
-  final _controller = TextEditingController();
-
-  
   FloatBtn({
+    required this.createNewTask,
     super.key,
-    required this.onEnviar
   });
 
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      onPressed: () => showDialog<String>(
-        context: context,
-        builder: (BuildContext context) => AlertDialog(
-          title: const Text('Inserir tarefa'),
-          // content: const Text('AlertDialog description'),
-          actions: <Widget>[
-            TextFormField(
-              controller: _controller,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(), labelText: 'Descreva a tarefa'),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context, 'Cancelar'),
-                  child: const Text('Cancelar'),
-                ),
-                TextButton(
-                  onPressed: onEnviar,
-                  child: const Text('Enviar'),
-                ),
-              ],
-            )
-          ],
-        ),
-      ),
+      onPressed: createNewTask,
       backgroundColor: Color(0xFFCC2936),
       child: const Icon(Icons.add),
     );

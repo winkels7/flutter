@@ -5,8 +5,9 @@ class ItemToDo extends StatelessWidget {
   final String nomeTarefa;
   final bool feito;
   Function(bool?)? onChanged;
+  Function(BuildContext)? deletar;
 
-  ItemToDo({Key? key, required this.nomeTarefa, required this.feito, required this.onChanged}) : super(key: key);
+  ItemToDo({Key? key, required this.nomeTarefa, required this.feito, required this.onChanged, required this.deletar}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +37,10 @@ class ItemToDo extends StatelessWidget {
             borderRadius: BorderRadius.circular(5),
           ),
           child: IconButton(
+            onPressed: () {},
             icon: Icon(Icons.delete),
             color: Colors.white,
             iconSize: 18,
-            onPressed: () {},
           )),
     ));
   }
