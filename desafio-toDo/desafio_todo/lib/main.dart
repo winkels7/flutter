@@ -13,6 +13,9 @@ import 'package:desafio_todo/screens/feito.dart';
 import 'package:desafio_todo/screens/naofeito.dart';
 import 'package:desafio_todo/screens/tudo.dart';
 
+//importando lista
+import 'package:desafio_todo/list/listaTodo.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await HiveConfig.start();
@@ -39,6 +42,7 @@ class TabLayoutExample extends StatefulWidget {
 class _TabLayoutExampleState extends State<TabLayoutExample>
     with TickerProviderStateMixin {
   late TabController _tabController;
+  late FloatBtn _controller;
 
   @override
   void initState() {
@@ -53,6 +57,13 @@ class _TabLayoutExampleState extends State<TabLayoutExample>
     Center(child: NaoFeito()),
   ];
 
+  void salvarTarefa() {
+    setState(() {
+      listaTodo.add([_controller, false]);
+    });
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -64,7 +75,9 @@ class _TabLayoutExampleState extends State<TabLayoutExample>
             backgroundColor: Color(0xFF08415C),
           ),
           bottomNavigationBar: Menu(),
-          floatingActionButton: FloatBtn(onEnviar: salvarTarefa,),
+          floatingActionButton: FloatBtn(
+            onEnviar: salvarTarefa,
+          ),
           body: TabBarView(
             children: _views,
           ),

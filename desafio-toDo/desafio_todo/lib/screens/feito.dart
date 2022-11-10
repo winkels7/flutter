@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:desafio_todo/widget/item_todo.dart';
+import 'package:desafio_todo/list/listaTodo.dart';
 
 // import 'package:desafio_todo/model/item.dart';
 
@@ -13,10 +14,6 @@ class Feito extends StatefulWidget {
 // final listaTodo = ToDo.todoLista();
 
 class _FeitoState extends State<Feito> {
-  List listaTodo = [
-    ["Teste", false],
-    ["Teste 2", false]
-  ];
 
   void checkBoxChanged(bool? value, int index) {
     setState(() {
