@@ -8,7 +8,7 @@ class Tudo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: Text('Pagina tudo'),
+        child: ItemToDo(),
       ),
     );
   }
