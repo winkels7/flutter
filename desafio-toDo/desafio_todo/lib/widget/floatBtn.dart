@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
 class FloatBtn extends StatelessWidget {
-  const FloatBtn({Key? key}) : super(key: key);
+  VoidCallback onEnviar;
+
+  final _controller = TextEditingController();
+
+  
+  FloatBtn({
+    super.key,
+    required this.onEnviar
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -9,17 +17,27 @@ class FloatBtn extends StatelessWidget {
       onPressed: () => showDialog<String>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-          title: const Text('AlertDialog Title'),
-          content: const Text('AlertDialog description'),
+          title: const Text('Inserir tarefa'),
+          // content: const Text('AlertDialog description'),
           actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.pop(context, 'Cancel'),
-              child: const Text('Cancel'),
+            TextFormField(
+              controller: _controller,
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(), labelText: 'Descreva a tarefa'),
             ),
-            TextButton(
-              onPressed: () => Navigator.pop(context, 'OK'),
-              child: const Text('OK'),
-            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context, 'Cancelar'),
+                  child: const Text('Cancelar'),
+                ),
+                TextButton(
+                  onPressed: onEnviar,
+                  child: const Text('Enviar'),
+                ),
+              ],
+            )
           ],
         ),
       ),

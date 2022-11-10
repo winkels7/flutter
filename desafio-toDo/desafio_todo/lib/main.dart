@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import 'package:desafio_todo/configs/hive_config.dart';
+
 import 'package:desafio_todo/widget/floatBtn.dart';
 import 'package:desafio_todo/widget/menu.dart';
 import 'package:desafio_todo/screens/feito.dart';
@@ -12,8 +14,8 @@ import 'package:desafio_todo/screens/naofeito.dart';
 import 'package:desafio_todo/screens/tudo.dart';
 
 void main() async {
-  await Hive.initFlutter();
-  await Hive.openBox('settings');
+  WidgetsFlutterBinding.ensureInitialized();
+  await HiveConfig.start();
   runApp(ToDoApp());
 }
 
@@ -45,7 +47,7 @@ class _TabLayoutExampleState extends State<TabLayoutExample>
     _tabController.animateTo(2);
   }
 
-  static  List<Widget> _views = [
+  static List<Widget> _views = [
     Center(child: Tudo()),
     Center(child: Feito()),
     Center(child: NaoFeito()),
@@ -62,7 +64,7 @@ class _TabLayoutExampleState extends State<TabLayoutExample>
             backgroundColor: Color(0xFF08415C),
           ),
           bottomNavigationBar: Menu(),
-          floatingActionButton: FloatBtn(),
+          floatingActionButton: FloatBtn(onEnviar: salvarTarefa,),
           body: TabBarView(
             children: _views,
           ),
