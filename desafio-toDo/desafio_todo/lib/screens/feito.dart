@@ -8,8 +8,17 @@ class Feito extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: ItemToDo(),
-      ),
+          margin: EdgeInsets.fromLTRB(5, 5, 5, 10),
+          child: ListView(
+            children: [
+              ItemToDo(),
+              ItemToDo(),
+              ItemToDo(),
+              ItemToDo(),
+              ItemToDo(),
+              ItemToDo(),
+            ],
+          )),
     );
   }
 }
