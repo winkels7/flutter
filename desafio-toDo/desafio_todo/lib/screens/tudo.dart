@@ -25,6 +25,10 @@ class _TudoState extends State<Tudo> {
     });
   }
 
+  refresh() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +41,7 @@ class _TudoState extends State<Tudo> {
                   nomeTarefa: listaTodo[index][0],
                   feito: listaTodo[index][1],
                   onChanged: (value) => checkBoxChanged(value, index),
-                  onDelete: (context) => deletar(index),
+                  // onDelete: (context) => deletar(index),
                 );
               }))),
     );

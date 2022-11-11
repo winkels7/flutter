@@ -44,7 +44,7 @@ class ItemToDo extends StatelessWidget {
             icon: Icon(Icons.delete),
             color: Colors.white,
             iconSize: 18,
-            onPressed: onDelete,
+            onPressed: () {},
           )),
     ));
   }

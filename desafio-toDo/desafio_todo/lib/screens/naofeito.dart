@@ -39,7 +39,7 @@ class _NaoFeitoState extends State<NaoFeito> {
                   nomeTarefa: listaTodo[index][0],
                   feito: listaTodo[index][1],
                   onChanged: (value) => checkBoxChanged(value, index),
-                  onDelete: (context) => deletar(),
+                  // onDelete: (context) => deletar(),
                 );
               }))),
     );
