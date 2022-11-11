@@ -1,22 +1,29 @@
 import 'package:flutter/material.dart';
 
-class FloatBtn extends StatelessWidget {
-  VoidCallback onEnviar;
+import 'package:desafio_todo/list/listaTodo.dart';
+
+class FloatBtn extends StatefulWidget {
+  FloatBtn({super.key});
+
+  @override
+  State<FloatBtn> createState() => _FloatBtnState();
+}
+
+class _FloatBtnState extends State<FloatBtn> {
+  void onEnviar() {
+    setState(() {
+      listaTodo.add([_controller.text, false]);
+    });
+  }
 
   final _controller = TextEditingController();
-
-  
-  FloatBtn({
-    super.key,
-    required this.onEnviar
-  });
 
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
       onPressed: () => showDialog<String>(
         context: context,
-        builder: (BuildContext context) => AlertDialog(
+        builder: (BuildContext contexto) => AlertDialog(
           title: const Text('Inserir tarefa'),
           // content: const Text('AlertDialog description'),
           actions: <Widget>[
@@ -29,11 +36,14 @@ class FloatBtn extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 TextButton(
-                  onPressed: () => Navigator.pop(context, 'Cancelar'),
+                  onPressed: () => Navigator.pop(contexto, 'Cancelar'),
                   child: const Text('Cancelar'),
                 ),
                 TextButton(
-                  onPressed: onEnviar,
+                  onPressed: () {
+                    onEnviar();
+                    Navigator.of(contexto).maybePop();
+                  },
                   child: const Text('Enviar'),
                 ),
               ],

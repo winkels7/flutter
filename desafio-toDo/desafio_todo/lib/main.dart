@@ -57,13 +57,6 @@ class _TabLayoutExampleState extends State<TabLayoutExample>
     Center(child: NaoFeito()),
   ];
 
-  void salvarTarefa() {
-    setState(() {
-      listaTodo.add([_controller, false]);
-    });
-    Navigator.of(context).pop();
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -75,9 +68,7 @@ class _TabLayoutExampleState extends State<TabLayoutExample>
             backgroundColor: Color(0xFF08415C),
           ),
           bottomNavigationBar: Menu(),
-          floatingActionButton: FloatBtn(
-            onEnviar: salvarTarefa,
-          ),
+          floatingActionButton: FloatBtn(),
           body: TabBarView(
             children: _views,
           ),
