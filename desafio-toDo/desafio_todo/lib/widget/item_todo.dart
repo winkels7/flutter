@@ -1,12 +1,18 @@
-// import 'package:desafio_todo/model/item.dart';
 import 'package:flutter/material.dart';
 
 class ItemToDo extends StatelessWidget {
   final String nomeTarefa;
   final bool feito;
   Function(bool?)? onChanged;
+  Function(BuildContext) onDelete;
 
-  ItemToDo({Key? key, required this.nomeTarefa, required this.feito, required this.onChanged}) : super(key: key);
+  ItemToDo(
+      {Key? key,
+      required this.nomeTarefa,
+      required this.feito,
+      required this.onChanged,
+      required this.onDelete,})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +46,8 @@ class ItemToDo extends StatelessWidget {
             color: Colors.white,
             iconSize: 18,
             onPressed: () {},
-          )),
+            // onPressed: onDelete(context),
+          ),),
     ));
   }
 }

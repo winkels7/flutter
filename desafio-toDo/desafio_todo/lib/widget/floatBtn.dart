@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-// import 'package:desafio_todo/list/listaTodo.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:desafio_todo/data/database.dart';
 
@@ -12,7 +11,6 @@ class FloatBtn extends StatefulWidget {
 }
 
 class _FloatBtnState extends State<FloatBtn> {
-
   final _myBox = Hive.box('mybox');
   final _controller = TextEditingController();
 
@@ -64,7 +62,9 @@ class _FloatBtnState extends State<FloatBtn> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 TextButton(
-                  onPressed: () => Navigator.pop(contexto, 'Cancelar'),
+                  onPressed: () {
+                    Navigator.pop(contexto, 'Cancelar');
+                  },
                   child: const Text('Cancelar'),
                 ),
                 TextButton(

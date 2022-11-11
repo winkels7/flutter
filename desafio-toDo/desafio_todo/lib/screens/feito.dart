@@ -4,8 +4,6 @@ import 'package:desafio_todo/widget/item_todo.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:desafio_todo/data/database.dart';
 
-// import 'package:desafio_todo/model/item.dart';
-
 class Feito extends StatefulWidget {
   Feito({super.key});
 
@@ -19,11 +17,9 @@ class _FeitoState extends State<Feito> {
 
   @override
   void initState() {
-    // if this is the 1st time ever openin the app, then create default data
     if (_myBox.get("LISTATODO") == null) {
-      // db.createInitialData();
+      db.createInitialData();
     } else {
-      // there already exists data
       db.loadData();
     }
 
@@ -37,6 +33,15 @@ class _FeitoState extends State<Feito> {
     db.updateDataBase();
   }
 
+  void deletar(int index) {
+    setState(() {
+      db.listaTodo.removeAt(index);
+    });
+    db.updateDataBase();
+  }
+
+  // var tarefasFeitas = _myBox.values.where((listaTodo[][1]) => true).toList();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,6 +54,7 @@ class _FeitoState extends State<Feito> {
                   nomeTarefa: db.listaTodo[index][0],
                   feito: db.listaTodo[index][1],
                   onChanged: (value) => checkBoxChanged(value, index),
+                  onDelete: (context) => deletar(index),
                 );
               }))),
     );

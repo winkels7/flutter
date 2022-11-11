@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter/rendering.dart';
 
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:desafio_todo/widget/floatBtn.dart';
@@ -11,9 +10,7 @@ import 'package:desafio_todo/screens/feito.dart';
 import 'package:desafio_todo/screens/naofeito.dart';
 import 'package:desafio_todo/screens/tudo.dart';
 
-//importando lista
 import 'package:desafio_todo/data/database.dart';
-// import 'package:desafio_todo/list/listaTodo.dart';
 
 void main() async {
   await Hive.initFlutter();

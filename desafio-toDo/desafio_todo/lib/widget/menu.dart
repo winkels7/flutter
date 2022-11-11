@@ -15,15 +15,15 @@ class Menu extends StatelessWidget {
         indicatorColor: Color.fromARGB(255, 125, 238, 213),
         tabs: [
           Tab(
-            text: "All",
+            text: "Todas",
             icon: Icon(Icons.list_alt),
           ),
           Tab(
-            text: "Done",
+            text: "Concluídas",
             icon: Icon(Icons.done),
           ),
           Tab(
-            text: "Not Done",
+            text: "Pendentes",
             icon: Icon(Icons.pending_actions),
           ),
         ],

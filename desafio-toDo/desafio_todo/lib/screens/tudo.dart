@@ -17,11 +17,9 @@ class _TudoState extends State<Tudo> {
 
   @override
   void initState() {
-    // if this is the 1st time ever openin the app, then create default data
     if (_myBox.get("LISTATODO") == null) {
-      // db.createInitialData();
+      db.createInitialData();
     } else {
-      // there already exists data
       db.loadData();
     }
 
@@ -31,6 +29,13 @@ class _TudoState extends State<Tudo> {
   void checkBoxChanged(bool? value, int index) {
     setState(() {
       db.listaTodo[index][1] = !db.listaTodo[index][1];
+    });
+    db.updateDataBase();
+  }
+
+  void deletar(int index) {
+    setState(() {
+      db.listaTodo.removeAt(index);
     });
     db.updateDataBase();
   }
@@ -47,6 +52,7 @@ class _TudoState extends State<Tudo> {
                   nomeTarefa: db.listaTodo[index][0],
                   feito: db.listaTodo[index][1],
                   onChanged: (value) => checkBoxChanged(value, index),
+                  onDelete: (context) => deletar(index),
                 );
               }))),
     );
