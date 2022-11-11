@@ -21,6 +21,12 @@ class _FeitoState extends State<Feito> {
     });
   }
 
+  void deletar(int index){
+    setState(() {
+      listaTodo.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +39,7 @@ class _FeitoState extends State<Feito> {
                   nomeTarefa: listaTodo[index][0],
                   feito: listaTodo[index][1],
                   onChanged: (value) => checkBoxChanged(value, index),
+                  onDelete: (context) => deletar(index),
                 );
               }))),
     );

@@ -12,12 +12,16 @@ class Tudo extends StatefulWidget {
   State<Tudo> createState() => _TudoState();
 }
 
-// final listaTodo = ToDo.todoLista();
-
 class _TudoState extends State<Tudo> {
   void checkBoxChanged(bool? value, int index) {
     setState(() {
       listaTodo[index][1] = !listaTodo[index][1];
+    });
+  }
+
+  void deletar(int index) {
+    setState(() {
+      listaTodo.removeAt(index);
     });
   }
 
@@ -33,6 +37,7 @@ class _TudoState extends State<Tudo> {
                   nomeTarefa: listaTodo[index][0],
                   feito: listaTodo[index][1],
                   onChanged: (value) => checkBoxChanged(value, index),
+                  onDelete: (context) => deletar(index),
                 );
               }))),
     );

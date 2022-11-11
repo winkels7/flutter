@@ -15,10 +15,15 @@ class NaoFeito extends StatefulWidget {
 // final listaTodo = ToDo.todoLista();
 
 class _NaoFeitoState extends State<NaoFeito> {
-
   void checkBoxChanged(bool? value, int index) {
     setState(() {
       listaTodo[index][1] = !listaTodo[index][1];
+    });
+  }
+
+  void deletar(int index) {
+    setState(() {
+      listaTodo.removeAt(index);
     });
   }
 
@@ -34,6 +39,7 @@ class _NaoFeitoState extends State<NaoFeito> {
                   nomeTarefa: listaTodo[index][0],
                   feito: listaTodo[index][1],
                   onChanged: (value) => checkBoxChanged(value, index),
+                  onDelete: (context) => deletar(),
                 );
               }))),
     );
