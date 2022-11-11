@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import 'package:desafio_todo/configs/hive_config.dart';
-
 import 'package:desafio_todo/widget/floatBtn.dart';
 import 'package:desafio_todo/widget/menu.dart';
 import 'package:desafio_todo/screens/feito.dart';
@@ -14,11 +12,12 @@ import 'package:desafio_todo/screens/naofeito.dart';
 import 'package:desafio_todo/screens/tudo.dart';
 
 //importando lista
-import 'package:desafio_todo/list/listaTodo.dart';
+import 'package:desafio_todo/data/database.dart';
+// import 'package:desafio_todo/list/listaTodo.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await HiveConfig.start();
+  await Hive.initFlutter();
+  var box = await Hive.openBox('mybox');
   runApp(ToDoApp());
 }
 
@@ -42,7 +41,6 @@ class TabLayoutExample extends StatefulWidget {
 class _TabLayoutExampleState extends State<TabLayoutExample>
     with TickerProviderStateMixin {
   late TabController _tabController;
-  late FloatBtn _controller;
 
   @override
   void initState() {

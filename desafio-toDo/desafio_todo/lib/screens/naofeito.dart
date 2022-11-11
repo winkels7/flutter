@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:desafio_todo/widget/item_todo.dart';
 
-import 'package:desafio_todo/list/listaTodo.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:desafio_todo/data/database.dart';
 
 // import 'package:desafio_todo/model/item.dart';
 
@@ -15,11 +16,27 @@ class NaoFeito extends StatefulWidget {
 // final listaTodo = ToDo.todoLista();
 
 class _NaoFeitoState extends State<NaoFeito> {
+  final _myBox = Hive.box('mybox');
+  ToDoDataBase db = ToDoDataBase();
+
+  @override
+  void initState() {
+    // if this is the 1st time ever openin the app, then create default data
+    if (_myBox.get("TODOLIST") == null) {
+      // db.createInitialData();
+    } else {
+      // there already exists data
+      db.loadData();
+    }
+
+    super.initState();
+  }
 
   void checkBoxChanged(bool? value, int index) {
     setState(() {
-      listaTodo[index][1] = !listaTodo[index][1];
+      db.listaTodo[index][1] = !db.listaTodo[index][1];
     });
+    db.updateDataBase();
   }
 
   @override
@@ -28,11 +45,11 @@ class _NaoFeitoState extends State<NaoFeito> {
       body: Container(
           margin: EdgeInsets.fromLTRB(5, 5, 5, 10),
           child: ListView.builder(
-              itemCount: listaTodo.length,
+              itemCount: db.listaTodo.length,
               itemBuilder: ((context, index) {
                 return ItemToDo(
-                  nomeTarefa: listaTodo[index][0],
-                  feito: listaTodo[index][1],
+                  nomeTarefa: db.listaTodo[index][0],
+                  feito: db.listaTodo[index][1],
                   onChanged: (value) => checkBoxChanged(value, index),
                 );
               }))),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:desafio_todo/list/listaTodo.dart';
+// import 'package:desafio_todo/list/listaTodo.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:desafio_todo/data/database.dart';
 
 class FloatBtn extends StatefulWidget {
   FloatBtn({super.key});
@@ -10,10 +12,35 @@ class FloatBtn extends StatefulWidget {
 }
 
 class _FloatBtnState extends State<FloatBtn> {
+  final _myBox = Hive.box('mybox');
+  ToDoDataBase db = ToDoDataBase();
+
+  @override
+  void initState() {
+    // if this is the 1st time ever openin the app, then create default data
+    if (_myBox.get("TODOLIST") == null) {
+      // db.createInitialData();
+    } else {
+      // there already exists data
+      db.loadData();
+    }
+
+    super.initState();
+  }
+
   void onEnviar() {
     setState(() {
-      listaTodo.add([_controller.text, false]);
+      db.listaTodo.add([_controller.text, false]);
+      _controller.clear();
     });
+    db.updateDataBase();
+  }
+
+  void deleteTask(int index) {
+    setState(() {
+      db.listaTodo.removeAt(index);
+    });
+    db.updateDataBase();
   }
 
   final _controller = TextEditingController();
@@ -43,6 +70,7 @@ class _FloatBtnState extends State<FloatBtn> {
                   onPressed: () {
                     onEnviar();
                     Navigator.of(contexto).maybePop();
+                    db.updateDataBase();
                   },
                   child: const Text('Enviar'),
                 ),
