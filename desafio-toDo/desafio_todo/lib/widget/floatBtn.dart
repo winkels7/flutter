@@ -12,13 +12,16 @@ class FloatBtn extends StatefulWidget {
 }
 
 class _FloatBtnState extends State<FloatBtn> {
+
   final _myBox = Hive.box('mybox');
+  final _controller = TextEditingController();
+
   ToDoDataBase db = ToDoDataBase();
 
   @override
   void initState() {
     // if this is the 1st time ever openin the app, then create default data
-    if (_myBox.get("TODOLIST") == null) {
+    if (_myBox.get("LISTATODO") == null) {
       // db.createInitialData();
     } else {
       // there already exists data
@@ -42,8 +45,6 @@ class _FloatBtnState extends State<FloatBtn> {
     });
     db.updateDataBase();
   }
-
-  final _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

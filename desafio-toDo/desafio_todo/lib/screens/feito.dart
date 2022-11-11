@@ -13,8 +13,6 @@ class Feito extends StatefulWidget {
   State<Feito> createState() => _FeitoState();
 }
 
-// final listaTodo = ToDo.todoLista();
-
 class _FeitoState extends State<Feito> {
   final _myBox = Hive.box('mybox');
   ToDoDataBase db = ToDoDataBase();
@@ -22,7 +20,7 @@ class _FeitoState extends State<Feito> {
   @override
   void initState() {
     // if this is the 1st time ever openin the app, then create default data
-    if (_myBox.get("TODOLIST") == null) {
+    if (_myBox.get("LISTATODO") == null) {
       // db.createInitialData();
     } else {
       // there already exists data

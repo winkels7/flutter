@@ -18,7 +18,7 @@ class _TudoState extends State<Tudo> {
   @override
   void initState() {
     // if this is the 1st time ever openin the app, then create default data
-    if (_myBox.get("TODOLIST") == null) {
+    if (_myBox.get("LISTATODO") == null) {
       // db.createInitialData();
     } else {
       // there already exists data
