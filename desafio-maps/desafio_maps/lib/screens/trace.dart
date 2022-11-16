@@ -11,15 +11,14 @@ class Trace extends StatefulWidget {
 }
 
 class _TraceState extends State<Trace> {
-
   Completer<GoogleMapController> _controller = Completer();
 
-  static final CameraPosition _kGooglePlex = CameraPosition(
+  static const CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
     zoom: 14.4746,
   );
 
-  static final CameraPosition _kLake = CameraPosition(
+  static const CameraPosition _kLake = CameraPosition(
       bearing: 192.8334901395799,
       target: LatLng(37.43296265331129, -122.08832357078792),
       tilt: 59.440717697143555,
@@ -29,6 +28,7 @@ class _TraceState extends State<Trace> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GoogleMap(
+        padding: const EdgeInsets.all(20),
         mapType: MapType.hybrid,
         initialCameraPosition: _kGooglePlex,
         onMapCreated: (GoogleMapController controller) {
@@ -37,8 +37,8 @@ class _TraceState extends State<Trace> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _goToTheLake,
-        label: Text('To the lake!'),
-        icon: Icon(Icons.directions_boat),
+        label: const Text('To the lake!'),
+        icon: const Icon(Icons.directions_boat),
       ),
     );
   }
@@ -48,4 +48,3 @@ class _TraceState extends State<Trace> {
     controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
   }
 }
-
