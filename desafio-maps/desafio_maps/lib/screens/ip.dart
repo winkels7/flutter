@@ -2,7 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
-import 'package:http/http.dart';
+// import 'package:/desafio_maps/api/http_service.dart';
+// import 'package:/desafio_maps/api/post_model.dart';
+import 'package:http/http.dart' as http;
 
 class IP extends StatefulWidget {
   IP({super.key});
@@ -17,8 +19,15 @@ class _IPState extends State<IP> {
 
   final _formKey = GlobalKey<FormState>();
 
-  chamadaAPI(value) {
-    log('valor: $value');
+  //vars http
+
+  chamadaAPI(value) async {
+    log('valor recebido do form: $value');
+    var url = Uri.http('ip-api.com', '/json/$value');
+    var response = await http.post(url);
+    // var decodedResponse = jsonDecode(utf8.decode(response.bodyBytes)) as Map;
+    log('status: $response.statusCode');
+    log(response.body);
   }
 
   @override
@@ -77,7 +86,7 @@ class _IPState extends State<IP> {
         Container(
           margin: EdgeInsets.all(20),
           child: Text(ipValue),
-        )
+        ),
       ]))),
     );
   }
