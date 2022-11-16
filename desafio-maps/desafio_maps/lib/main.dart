@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter/rendering.dart';
 
-import 'package:desafio_maps/widget/floatBtn.dart';
 import 'package:desafio_maps/widget/menu.dart';
 import 'package:desafio_maps/screens/ip.dart';
 import 'package:desafio_maps/screens/trace.dart';
@@ -58,7 +57,6 @@ class _TabLayoutExampleState extends State<TabLayoutExample>
             backgroundColor: Color(0xFF698F3F),
           ),
           bottomNavigationBar: Menu(),
-          floatingActionButton: FloatBtn(),
           body: TabBarView(
             children: _views,
           ),

@@ -32,10 +32,8 @@ class _IPState extends State<IP> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-          body: Center(
-              child: Column(children: <Widget>[
+    return new Scaffold(
+        body: new Column(children: <Widget>[
         Container(
             margin: EdgeInsets.all(20),
             child: Text(
@@ -50,7 +48,7 @@ class _IPState extends State<IP> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextFormField(
-                      // The validator receives the text that the user has entered.
+                      keyboardType: TextInputType.number,
                       validator: (value) {
                     if (value == null ||
                         value.isEmpty ||
@@ -87,7 +85,6 @@ class _IPState extends State<IP> {
           margin: EdgeInsets.all(20),
           child: Text(ipValue),
         ),
-      ]))),
-    );
+      ]));
   }
 }
