@@ -1,5 +1,7 @@
 # desafio_maps
 
+Paleta: https://coolors.co/0a122a-698f3f-fbfaf8-e7decd-804e49
+
 A new Flutter project.
 
 ## Getting Started
