@@ -8,13 +8,43 @@ class IP extends StatefulWidget {
 }
 
 class _IPState extends State<IP> {
+  TextEditingController ipController = TextEditingController();
+  String ipValue = '';
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        margin: EdgeInsets.fromLTRB(5, 5, 5, 10),
-        child: Text("IP"),
-      ),
+    return MaterialApp(
+      home: Scaffold(
+          body: Center(
+              child: Column(children: <Widget>[
+        Container(
+            margin: EdgeInsets.all(20),
+            child: Text(
+              "Pesquisa por IP",
+              style: TextStyle(fontSize: 24),
+            )),
+        Container(
+            margin: EdgeInsets.all(20),
+            child: TextField(
+              controller: ipController,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'IP',
+              ),
+              onChanged: (text) {
+                setState(() {
+                  ipValue = text;
+                  //you can access ipController in its scope to get
+                  // the value of text entered as shown below
+                  //ipValue = ipController.text;
+                });
+              },
+            )),
+        Container(
+          margin: EdgeInsets.all(20),
+          child: Text(ipValue),
+        )
+      ]))),
     );
   }
 }

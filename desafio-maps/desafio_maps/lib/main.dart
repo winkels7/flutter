@@ -9,10 +9,10 @@ import 'package:desafio_maps/screens/trace.dart';
 import 'package:desafio_maps/screens/help.dart';
 
 void main() async {
-  runApp(ToDoApp());
+  runApp(AppMaps());
 }
 
-class ToDoApp extends StatelessWidget {
+class AppMaps extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
