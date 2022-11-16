@@ -8,13 +8,15 @@ import 'package:desafio_maps/screens/trace.dart';
 import 'package:desafio_maps/screens/help.dart';
 
 void main() async {
-  runApp(AppMaps());
+  runApp(const AppMaps());
 }
 
 class AppMaps extends StatelessWidget {
+  const AppMaps({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'App Maps',
       home: TabLayoutExample(),
@@ -23,6 +25,8 @@ class AppMaps extends StatelessWidget {
 }
 
 class TabLayoutExample extends StatefulWidget {
+  const TabLayoutExample({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return _TabLayoutExampleState();
@@ -40,10 +44,10 @@ class _TabLayoutExampleState extends State<TabLayoutExample>
     _tabController.animateTo(2);
   }
 
-  static List<Widget> _views = [
-    Center(child: IP()),
-    Center(child: Trace()),
-    Center(child: Help()),
+  static final List<Widget> _views = [
+    const Center(child: IP()),
+    const Center(child: Trace()),
+    const Center(child: Help()),
   ];
 
   @override
@@ -54,9 +58,9 @@ class _TabLayoutExampleState extends State<TabLayoutExample>
         child: Scaffold(
           appBar: AppBar(
             title: const Text('App Maps'),
-            backgroundColor: Color(0xFF698F3F),
+            backgroundColor: const Color(0xFF698F3F),
           ),
-          bottomNavigationBar: Menu(),
+          bottomNavigationBar: const Menu(),
           body: TabBarView(
             children: _views,
           ),

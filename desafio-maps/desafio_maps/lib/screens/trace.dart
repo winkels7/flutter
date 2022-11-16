@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Trace extends StatefulWidget {
-  Trace({super.key});
+  const Trace({super.key});
 
   @override
   State<Trace> createState() => _TraceState();
@@ -27,7 +27,7 @@ class _TraceState extends State<Trace> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       body: GoogleMap(
         mapType: MapType.hybrid,
         initialCameraPosition: _kGooglePlex,

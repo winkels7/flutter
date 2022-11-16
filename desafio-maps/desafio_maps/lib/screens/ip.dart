@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class IP extends StatefulWidget {
-  IP({super.key});
+  const IP({super.key});
 
   @override
   State<IP> createState() => _IPState();
@@ -32,59 +32,60 @@ class _IPState extends State<IP> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-        body: new Column(children: <Widget>[
-        Container(
-            margin: EdgeInsets.all(20),
-            child: Text(
-              "Pesquisa por IP",
-              style: TextStyle(fontSize: 24),
-            )),
-        Container(
-            margin: EdgeInsets.all(20),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextFormField(
-                      keyboardType: TextInputType.number,
-                      validator: (value) {
-                    if (value == null ||
-                        value.isEmpty ||
-                        value.contains(new RegExp(r'[A-Z]'))) {
-                      return 'Por gentileza, insira um IP';
-                    }
-                    return null;
-                  }, onChanged: (text) {
-                    setState(() {
-                      ipValue = text;
-                    });
-                  }),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        // Validate returns true if the form is valid, or false otherwise.
-                        if (_formKey.currentState!.validate()) {
-                          // If the form is valid, display a snackbar. In the real world,
-                          // you'd often call a server or save the information in a database.
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Processando Dados')),
-                          );
-                          chamadaAPI(ipValue);
-                        }
-                      },
-                      child: const Text('Enviar'),
-                    ),
+    return Scaffold(
+        body: Column(children: <Widget>[
+      Container(
+          margin: const EdgeInsets.all(20),
+          child: const Text(
+            "Pesquisa por IP",
+            style: TextStyle(fontSize: 24),
+          )),
+      Container(
+          margin: const EdgeInsets.all(20),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextFormField(
+                    keyboardType: TextInputType.number,
+                    validator: (value) {
+                      if (value == null ||
+                          value.isEmpty ||
+                          value.contains(RegExp(r'[A-Z]'))) {
+                        return 'Por gentileza, insira um IP';
+                      }
+                      return null;
+                    },
+                    onChanged: (text) {
+                      setState(() {
+                        ipValue = text;
+                      });
+                    }),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // Validate returns true if the form is valid, or false otherwise.
+                      if (_formKey.currentState!.validate()) {
+                        // If the form is valid, display a snackbar. In the real world,
+                        // you'd often call a server or save the information in a database.
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Processando Dados')),
+                        );
+                        chamadaAPI(ipValue);
+                      }
+                    },
+                    child: const Text('Enviar'),
                   ),
-                ],
-              ),
-            )),
-        Container(
-          margin: EdgeInsets.all(20),
-          child: Text(ipValue),
-        ),
-      ]));
+                ),
+              ],
+            ),
+          )),
+      Container(
+        margin: const EdgeInsets.all(20),
+        child: Text(ipValue),
+      ),
+    ]));
   }
 }

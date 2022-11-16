@@ -6,8 +6,8 @@ class Menu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xFF698F3F),
-      child: TabBar(
+      color: const Color(0xFF698F3F),
+      child: const TabBar(
         labelColor: Colors.white,
         unselectedLabelColor: Colors.white70,
         indicatorSize: TabBarIndicatorSize.tab,
