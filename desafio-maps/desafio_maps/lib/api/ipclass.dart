@@ -1,4 +1,4 @@
-class Album {
+class IPData {
   final String status;
   final String country;
   final String countryCode;
@@ -13,7 +13,7 @@ class Album {
   final String org;
   final String query;
 
-  const Album({
+  const IPData({
     required this.status,
     required this.country,
     required this.countryCode,
@@ -29,8 +29,8 @@ class Album {
     required this.query
   });
 
-  factory Album.fromJson(Map<String, dynamic> json) {
-    return Album(
+  factory IPData.fromJson(Map<String, dynamic> json) {
+    return IPData(
       status: json['status'],
       country: json['country'],
       countryCode: json['countryCode'],

@@ -1,22 +1,17 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:desafio_maps/api/ipclass.dart';
 
-Future<Album> fetchAlbum(value) async {
+Future<IPData> chamadaAPI(value) async {
   final response = await http.get(Uri.parse('http://ip-api.com/json/$value'));
 
   if (response.statusCode == 200) {
-    // If the server did return a 200 OK response,
-    // then parse the JSON.
-    return Album.fromJson(jsonDecode(response.body));
+    return IPData.fromJson(jsonDecode(response.body));
   } else {
-    // If the server did not return a 200 OK response,
-    // then throw an exception.
-    throw Exception('Failed to load album');
+    throw Exception('Falha ao carregar informações');
   }
 }
 
@@ -28,7 +23,7 @@ class IP extends StatefulWidget {
 }
 
 class _IPState extends State<IP> {
-  late Future<Album> futureAlbum;
+  late Future<IPData> ipData;
 
   TextEditingController ipController = TextEditingController();
   String ipValue = '';
@@ -38,7 +33,7 @@ class _IPState extends State<IP> {
   @override
   void initState() {
     super.initState();
-    futureAlbum = fetchAlbum(ipValue);
+    ipData = chamadaAPI(ipValue);
   }
 
   @override
@@ -78,38 +73,56 @@ class _IPState extends State<IP> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        // If the form is valid, display a snackbar. In the real world,
-                        // you'd often call a server or save the information in a database.
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Processando Dados')),
                         );
                         setState(() {
-                          futureAlbum = fetchAlbum(ipValue);
+                          ipData = chamadaAPI(ipValue);
                         });
                       }
                     },
                     child: const Text('Enviar'),
                   ),
                 ),
-                FutureBuilder<Album>(
-                  future: futureAlbum,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return Text(
-                          '${snapshot.data!.status} ${snapshot.data!.city} ${snapshot.data!.isp}');
-                    } else if (snapshot.hasError) {
-                      return Text('${snapshot.error}');
-                    }
-
-                    return const CircularProgressIndicator();
-                  },
-                ),
               ],
             ),
           )),
-      Container(
-        margin: const EdgeInsets.all(20),
-        child: Text(ipValue),
+      FutureBuilder<IPData>(
+        future: ipData,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Column(children: <Widget>[
+              Container(
+                  width: 250,
+                  height: 30,
+                  child: Text('IP: ${snapshot.data!.query}',
+                      style: TextStyle(fontSize: 16))),
+              Container(
+                  width: 250,
+                  height: 30,
+                  child: Text('País: ${snapshot.data!.country}',
+                      style: TextStyle(fontSize: 16))),
+              Container(
+                  width: 250,
+                  height: 30,
+                  child: Text('Região: ${snapshot.data!.region}',
+                      style: TextStyle(fontSize: 16))),
+              Container(
+                  width: 250,
+                  height: 30,
+                  child: Text('Cidade: ${snapshot.data!.city}',
+                      style: TextStyle(fontSize: 16))),
+              Container(
+                  width: 250,
+                  height: 30,
+                  child: Text('Provedor: ${snapshot.data!.isp}',
+                      style: TextStyle(fontSize: 16))),
+            ]);
+          } else if (snapshot.hasError) {
+            return Text('${snapshot.error}');
+          }
+          return const CircularProgressIndicator();
+        },
       ),
     ]));
   }
