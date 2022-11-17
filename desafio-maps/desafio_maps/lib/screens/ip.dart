@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:desafio_maps/api/ipclass.dart';
 
 Future<Album> fetchAlbum(value) async {
   final response = await http.get(Uri.parse('http://ip-api.com/json/$value'));
@@ -16,26 +17,6 @@ Future<Album> fetchAlbum(value) async {
     // If the server did not return a 200 OK response,
     // then throw an exception.
     throw Exception('Failed to load album');
-  }
-}
-
-class Album {
-  final String status;
-  final String city;
-  final String isp;
-
-  const Album({
-    required this.status,
-    required this.city,
-    required this.isp,
-  });
-
-  factory Album.fromJson(Map<String, dynamic> json) {
-    return Album(
-      status: json['status'],
-      city: json['city'],
-      isp: json['isp'],
-    );
   }
 }
 
@@ -58,16 +39,6 @@ class _IPState extends State<IP> {
   void initState() {
     super.initState();
     futureAlbum = fetchAlbum(ipValue);
-  }
-  //vars http
-
-  chamadaAPI(value) async {
-    log('valor recebido do form: $value');
-    var url = Uri.http('ip-api.com', '/json/$value');
-    var response = await http.post(url);
-    // var decodedResponse = jsonDecode(utf8.decode(response.bodyBytes)) as Map;
-    log('status: $response.statusCode');
-    log(response.body);
   }
 
   @override
@@ -106,14 +77,12 @@ class _IPState extends State<IP> {
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   child: ElevatedButton(
                     onPressed: () {
-                      // Validate returns true if the form is valid, or false otherwise.
                       if (_formKey.currentState!.validate()) {
                         // If the form is valid, display a snackbar. In the real world,
                         // you'd often call a server or save the information in a database.
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Processando Dados')),
                         );
-                        chamadaAPI(ipValue);
                         setState(() {
                           futureAlbum = fetchAlbum(ipValue);
                         });
@@ -126,12 +95,12 @@ class _IPState extends State<IP> {
                   future: futureAlbum,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                      return Text(snapshot.data!.city);
+                      return Text(
+                          '${snapshot.data!.status} ${snapshot.data!.city} ${snapshot.data!.isp}');
                     } else if (snapshot.hasError) {
                       return Text('${snapshot.error}');
                     }
 
-                    // By default, show a loading spinner.
                     return const CircularProgressIndicator();
                   },
                 ),
