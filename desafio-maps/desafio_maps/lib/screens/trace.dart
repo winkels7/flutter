@@ -16,13 +16,13 @@ class Trace extends StatefulWidget {
 class _TraceState extends State<Trace> {
   Completer<GoogleMapController> _controller = Completer();
   static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
+    target: LatLng(-29.6899171, -52.4551852),
     zoom: 14.4746,
   );
 
   static const CameraPosition _kLake = CameraPosition(
       bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
+      target: LatLng(-29.6899171,-52.4551852),
       tilt: 59.440717697143555,
       zoom: 19.151926040649414);
 
@@ -39,11 +39,11 @@ class _TraceState extends State<Trace> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.gps_fixed_sharp),
-        backgroundColor: Color.fromARGB(255, 44, 207, 79),
+        backgroundColor: const Color.fromARGB(255, 44, 207, 79),
         onPressed: () {
           _goToTheLake();
         },
+        child: const Icon(Icons.gps_fixed_sharp),
       ),
     );
   }
