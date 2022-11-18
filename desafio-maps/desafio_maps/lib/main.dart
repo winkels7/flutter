@@ -46,7 +46,7 @@ class _TabLayoutExampleState extends State<TabLayoutExample>
 
   static final List<Widget> _views = [
     const Center(child: IP()),
-    const Center(child: Trace()),
+    Center(child: Trace(lat: -2)),
     const Center(child: Help()),
   ];
 

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:async';
 
+// import 'package:desafio_maps/screens/trace.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:desafio_maps/api/ipclass.dart';
@@ -25,7 +26,14 @@ class IP extends StatefulWidget {
 class _IPState extends State<IP> {
   late Future<IPData> ipData;
 
-  TextEditingController ipController = TextEditingController();
+  final myController = TextEditingController();
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    myController.dispose();
+    super.dispose();
+  }
+
   String ipValue = '';
 
   final _formKey = GlobalKey<FormState>();
@@ -41,13 +49,13 @@ class _IPState extends State<IP> {
     return Scaffold(
         body: Column(children: <Widget>[
       Container(
-          margin: const EdgeInsets.all(20),
+          margin: const EdgeInsets.fromLTRB(20, 20, 20, 10),
           child: const Text(
             "Pesquisa por IP",
             style: TextStyle(fontSize: 24),
           )),
       Container(
-          margin: const EdgeInsets.all(20),
+          margin: const EdgeInsets.all(15),
           child: Form(
             key: _formKey,
             child: Column(
@@ -69,7 +77,7 @@ class _IPState extends State<IP> {
                       });
                     }),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  padding: const EdgeInsets.symmetric(vertical: 14.0),
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
@@ -91,32 +99,48 @@ class _IPState extends State<IP> {
         future: ipData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(
+            //     builder: (context) => Trace(lat: snapshot.data!.lat),
+            //   ),
+            // );
             return Column(children: <Widget>[
-              Container(
+              SizedBox(
                   width: 250,
                   height: 30,
                   child: Text('IP: ${snapshot.data!.query}',
-                      style: TextStyle(fontSize: 16))),
-              Container(
+                      style: const TextStyle(fontSize: 16))),
+              SizedBox(
                   width: 250,
                   height: 30,
                   child: Text('País: ${snapshot.data!.country}',
-                      style: TextStyle(fontSize: 16))),
-              Container(
+                      style: const TextStyle(fontSize: 16))),
+              SizedBox(
                   width: 250,
                   height: 30,
                   child: Text('Região: ${snapshot.data!.region}',
-                      style: TextStyle(fontSize: 16))),
-              Container(
+                      style: const TextStyle(fontSize: 16))),
+              SizedBox(
                   width: 250,
                   height: 30,
                   child: Text('Cidade: ${snapshot.data!.city}',
-                      style: TextStyle(fontSize: 16))),
-              Container(
+                      style: const TextStyle(fontSize: 16))),
+              SizedBox(
                   width: 250,
                   height: 30,
                   child: Text('Provedor: ${snapshot.data!.isp}',
-                      style: TextStyle(fontSize: 16))),
+                      style: const TextStyle(fontSize: 16))),
+              SizedBox(
+                  width: 250,
+                  height: 30,
+                  child: Text('Latitude: ${snapshot.data!.lat}',
+                      style: const TextStyle(fontSize: 16))),
+              SizedBox(
+                  width: 250,
+                  height: 30,
+                  child: Text('Longitude: ${snapshot.data!.lon}',
+                      style: const TextStyle(fontSize: 16))),
             ]);
           } else if (snapshot.hasError) {
             return Text('${snapshot.error}');

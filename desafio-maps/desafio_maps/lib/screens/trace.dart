@@ -4,7 +4,10 @@ import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Trace extends StatefulWidget {
-  const Trace({super.key});
+  Trace({super.key, required this.lat});
+
+  var lat = 37.42796133580664;
+  var lon = -122.085749655962;
 
   @override
   State<Trace> createState() => _TraceState();
@@ -12,7 +15,6 @@ class Trace extends StatefulWidget {
 
 class _TraceState extends State<Trace> {
   Completer<GoogleMapController> _controller = Completer();
-
   static const CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
     zoom: 14.4746,
@@ -26,6 +28,7 @@ class _TraceState extends State<Trace> {
 
   @override
   Widget build(BuildContext context) {
+    widget.lat;
     return Scaffold(
       body: GoogleMap(
         padding: const EdgeInsets.all(20),
@@ -35,10 +38,12 @@ class _TraceState extends State<Trace> {
           _controller.complete(controller);
         },
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _goToTheLake,
-        label: const Text('To the lake!'),
-        icon: const Icon(Icons.directions_boat),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.gps_fixed_sharp),
+        backgroundColor: Color.fromARGB(255, 44, 207, 79),
+        onPressed: () {
+          _goToTheLake();
+        },
       ),
     );
   }
