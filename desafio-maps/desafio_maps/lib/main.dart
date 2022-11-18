@@ -1,15 +1,31 @@
 // import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter/rendering.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:async';
 
 import 'package:desafio_maps/widget/menu.dart';
 import 'package:desafio_maps/screens/ip.dart';
 import 'package:desafio_maps/screens/trace.dart';
 import 'package:desafio_maps/screens/help.dart';
 
+import 'package:desafio_maps/api/ipclass.dart';
+
+Future<IPData> chamadaAPI(value) async {
+  final response = await http.get(Uri.parse('http://ip-api.com/json/$value'));
+
+  if (response.statusCode == 200) {
+    return IPData.fromJson(jsonDecode(response.body));
+  } else {
+    throw Exception('Falha ao carregar informações');
+  }
+}
+
 void main() async {
   runApp(const AppMaps());
 }
+
+
 
 class AppMaps extends StatelessWidget {
   const AppMaps({super.key});
@@ -46,7 +62,7 @@ class _TabLayoutExampleState extends State<TabLayoutExample>
 
   static final List<Widget> _views = [
     const Center(child: IP()),
-    Center(child: Trace(lat: -2)),
+    const Center(child: Trace()),
     const Center(child: Help()),
   ];
 

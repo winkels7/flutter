@@ -1,20 +1,12 @@
-import 'dart:convert';
+// import 'dart:convert';
 import 'dart:async';
 
 // import 'package:desafio_maps/screens/trace.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+// import 'package:http/http.dart' as http;
 import 'package:desafio_maps/api/ipclass.dart';
 
-Future<IPData> chamadaAPI(value) async {
-  final response = await http.get(Uri.parse('http://ip-api.com/json/$value'));
-
-  if (response.statusCode == 200) {
-    return IPData.fromJson(jsonDecode(response.body));
-  } else {
-    throw Exception('Falha ao carregar informações');
-  }
-}
+import '../main.dart';
 
 class IP extends StatefulWidget {
   const IP({super.key});
@@ -29,7 +21,6 @@ class _IPState extends State<IP> {
   final myController = TextEditingController();
   @override
   void dispose() {
-    // Clean up the controller when the widget is disposed.
     myController.dispose();
     super.dispose();
   }
